@@ -206,6 +206,33 @@ blockquote {
   margin-bottom: 2rem;
 }
 
+/* ── Entry section tag ─────────────────────────── */
+.entry-list .entry-section {
+  color: var(--dim);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  min-width: 5ch;
+}
+
+/* ── Pagination ────────────────────────────────── */
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.pagination-info { color: var(--dim); }
+.pagination a { border-bottom: none; }
+.pagination a:hover { background: none; color: var(--accent); }
+
 /* ── Footer ────────────────────────────────────── */
 .site-footer {
   border-top: 1px solid var(--rule);

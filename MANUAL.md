@@ -230,3 +230,24 @@ The server live-reloads on file changes. Ctrl-C stops.
 This is entirely optional because Cloudflare's build catches most issues and the push-and-wait loop is fast enough that local preview isn't strictly necessary.
 
 One reason to consider this is that on the free tier of cloudflare you're limited to 500 builds permonth, so if you were rapidly trying out different changes then a local preview would stop you blowing through your build budget.
+
+## Appendix B: Social preview tags (optional)
+
+Currently, if you share a link to this site on Discord, Slack, etc., it'll show the page title but no description or preview image. To add those, you'd need to:
+
+1. Add a `description` field to each page's frontmatter:
+   ```markdown
+   ---
+   title: "My post"
+   date: 2026-06-01
+   description: "A short summary for link previews"
+   ---
+   ```
+2. Add Open Graph meta tags to `layouts/_default/baseof.html` inside `<head>`:
+   ```html
+   {{ with .Description }}<meta name="description" content="{{ . }}">{{ end }}
+   <meta property="og:title" content="{{ .Title }}">
+   {{ with .Description }}<meta property="og:description" content="{{ . }}">{{ end }}
+   ```
+
+Not essential — the site works fine without it. Worth adding if you find yourself sharing links and wanting them to look polished in previews.

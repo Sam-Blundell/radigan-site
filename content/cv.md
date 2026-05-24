@@ -3,7 +3,7 @@ title: "CV"
 designation: "PERSONNEL FILE"
 ---
 
-Placeholder. Replace with work history, education, and skills.
+I dunno if you want a CV. I'm putting the kitchen sink on here so you can just delete as needed.
 
 ## Experience
 
@@ -16,5 +16,6 @@ Placeholder. Replace with work history, education, and skills.
 
 ## Skills
 
-- C, embedded systems, industrial automation
-- (etc.)
+- C
+- embedded systems
+- etc

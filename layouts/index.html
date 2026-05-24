@@ -3,8 +3,30 @@
   <div class="page-designation">[ PERSONNEL TERMINAL ]</div>
   <h1 class="landing-title">{{ .Site.Title }}</h1>
   <div class="landing-tagline">{{ .Site.Params.tagline }}</div>
-  <div class="landing-body">
-    {{ .Content }}
-  </div>
+  {{ with .Content }}<div class="landing-body">{{ . }}</div>{{ end }}
+</section>
+
+<section class="feed">
+  <h2>Recent Activity</h2>
+  {{ $pages := where .Site.RegularPages "Section" "in" (slice "blog" "projects") }}
+  {{ $paginator := .Paginate $pages 5 }}
+  <ul class="entry-list">
+    {{ range $paginator.Pages }}
+    <li>
+      <span class="entry-date">{{ .Date.Format "2006-01-02" }}</span>
+      <span class="entry-section">{{ upper .Section }}</span>
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </li>
+    {{ end }}
+  </ul>
+  {{ with $paginator }}
+    {{ if gt .TotalPages 1 }}
+    <nav class="pagination">
+      {{ if .HasPrev }}<a href="{{ .Prev.URL }}">← PREV</a>{{ end }}
+      <span class="pagination-info">{{ .PageNumber }} / {{ .TotalPages }}</span>
+      {{ if .HasNext }}<a href="{{ .Next.URL }}">NEXT →</a>{{ end }}
+    </nav>
+    {{ end }}
+  {{ end }}
 </section>
 {{ end }}

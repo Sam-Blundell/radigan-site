@@ -1,5 +1,5 @@
 baseURL = 'https://radigan-site.pages.dev/'
-languageCode = 'en-au'
+locale = 'en-au'
 timeZone = 'Australia/Sydney'
 title = 'RADIGAN'
 
@@ -35,3 +35,8 @@ title = 'RADIGAN'
   name = "LINKS"
   url = "/links/"
   weight = 60
+
+[[menu.main]]
+  name = "CONTACT"
+  url = "/contact/"
+  weight = 70

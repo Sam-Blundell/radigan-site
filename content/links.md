@@ -3,8 +3,7 @@ title: "Links"
 designation: "EXTERNAL TRANSMISSIONS"
 ---
 
-Placeholder. A loose collection of things worth reading, watching, or
-following. No taxonomy required — just whatever's signal.
+I actually like link pages the most when I check out a personal site, seeing what people like to read or watch feels like it tells me more about them than their about page does.
 
 - [Example link](https://example.org)
 - [Another example](https://example.org)
