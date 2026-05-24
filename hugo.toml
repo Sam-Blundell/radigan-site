@@ -2,6 +2,7 @@ baseURL = 'https://radigan-site.pages.dev/'
 locale = 'en-au'
 timeZone = 'Australia/Sydney'
 title = 'RADIGAN'
+disableKinds = ['taxonomy', 'term']
 
 [params]
   tagline = "INDUSTRIAL AUTOMATION // PERSONAL TERMINAL"
