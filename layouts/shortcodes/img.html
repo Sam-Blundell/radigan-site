@@ -1,0 +1,17 @@
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $maxW := .Get "width" | default "1400" -}}
+
+{{- $img := resources.Get (printf "images/%s" $src) -}}
+{{- if not $img -}}
+  {{- errorf "img shortcode: no image found at assets/images/%s (called from %s)" $src .Page.Path -}}
+{{- end -}}
+
+{{- $out := $img -}}
+{{- if gt $img.Width (int $maxW) -}}
+  {{- $out = $img.Process (printf "resize %sx webp q82" $maxW) -}}
+{{- else if ne $img.MediaType.SubType "webp" -}}
+  {{- $out = $img.Process "webp q82" -}}
+{{- end -}}
+
+<img src="{{ $out.RelPermalink }}" alt="{{ $alt }}" width="{{ $out.Width }}" height="{{ $out.Height }}" loading="lazy">
