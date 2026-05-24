@@ -9,7 +9,7 @@
 <section class="feed">
   <h2>Recent Activity</h2>
   {{ $pages := where .Site.RegularPages "Section" "in" (slice "blog" "projects") }}
-  {{ $paginator := .Paginate $pages 5 }}
+  {{ $paginator := .Paginate $pages (.Site.Params.perPage | default 5) }}
   <ul class="entry-list">
     {{ range $paginator.Pages }}
     <li>

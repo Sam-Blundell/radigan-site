@@ -5,6 +5,7 @@ title = 'RADIGAN'
 
 [params]
   tagline = "INDUSTRIAL AUTOMATION // PERSONAL TERMINAL"
+  perPage = 5
 
 [[menu.main]]
   name = "ABOUT"

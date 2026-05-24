@@ -135,9 +135,10 @@ title = 'RADIGAN'
 
 [params]
   tagline = "INDUSTRIAL AUTOMATION // PERSONAL TERMINAL"
+  perPage = 5
 ```
 
-`title` appears in the header and the browser tab. `tagline` appears under the title on the homepage only.
+`title` appears in the header and the browser tab. `tagline` appears under the title on the homepage only. `perPage` controls how many entries appear per page on the homepage, blog, and projects lists before pagination kicks in.
 
 ### Add or remove a nav item
 

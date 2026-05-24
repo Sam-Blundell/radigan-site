@@ -8,14 +8,25 @@
 <div class="page-content">{{ . }}</div>
 {{ end }}
 
-{{ with .Pages }}
+{{ $paginator := .Paginate .Pages.ByDate.Reverse (.Site.Params.perPage | default 5) }}
+{{ with $paginator.Pages }}
 <ul class="entry-list">
-  {{ range .ByDate.Reverse }}
+  {{ range . }}
   <li>
     <div class="entry-meta">{{ .Date.Format "2006-01-02" }}</div>
     <a href="{{ .RelPermalink }}">{{ .Title }}</a>
   </li>
   {{ end }}
 </ul>
+{{ end }}
+
+{{ with $paginator }}
+  {{ if gt .TotalPages 1 }}
+  <nav class="pagination">
+    {{ if .HasPrev }}<a href="{{ .Prev.URL }}">← PREV</a>{{ else }}<span class="pagination-disabled">← PREV</span>{{ end }}
+    <span class="pagination-info">{{ .PageNumber }} / {{ .TotalPages }}</span>
+    {{ if .HasNext }}<a href="{{ .Next.URL }}">NEXT →</a>{{ else }}<span class="pagination-disabled">NEXT →</span>{{ end }}
+  </nav>
+  {{ end }}
 {{ end }}
 {{ end }}
