@@ -222,7 +222,7 @@ blockquote {
   align-items: center;
   gap: 1.5rem;
   margin-top: 1.5rem;
-  padding-top: 1rem;
+  padding: 1rem 0 2rem;
   border-top: 1px solid var(--rule);
   font-size: 0.82rem;
   text-transform: uppercase;
