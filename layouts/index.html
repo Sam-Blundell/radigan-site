@@ -13,8 +13,7 @@
   <ul class="entry-list">
     {{ range $paginator.Pages }}
     <li>
-      <span class="entry-date">{{ .Date.Format "2006-01-02" }}</span>
-      <span class="entry-section">{{ upper .Section }}</span>
+      <div class="entry-meta">{{ .Date.Format "2006-01-02" }} // {{ upper .Section }}</div>
       <a href="{{ .RelPermalink }}">{{ .Title }}</a>
     </li>
     {{ end }}

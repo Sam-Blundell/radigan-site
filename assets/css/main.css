@@ -70,6 +70,11 @@ pre {
 
 pre code { background: none; padding: 0; border: none; }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 blockquote {
   margin: 1rem 0;
   padding-left: 1rem;
@@ -176,16 +181,16 @@ blockquote {
 }
 
 .entry-list li {
-  display: flex;
-  gap: 1.5rem;
-  padding: 0.55rem 0;
+  padding: 0.6rem 0;
   border-bottom: 1px dashed var(--rule);
 }
 
-.entry-list .entry-date {
+.entry-meta {
   color: var(--dim);
-  font-size: 0.85rem;
-  flex-shrink: 0;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.15rem;
 }
 
 .entry-list a { border-bottom: none; }
@@ -204,16 +209,6 @@ blockquote {
   letter-spacing: 0.08em;
   font-size: 0.85rem;
   margin-bottom: 2rem;
-}
-
-/* ── Entry section tag ─────────────────────────── */
-.entry-list .entry-section {
-  color: var(--dim);
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  flex-shrink: 0;
-  min-width: 5ch;
 }
 
 /* ── Pagination ────────────────────────────────── */
