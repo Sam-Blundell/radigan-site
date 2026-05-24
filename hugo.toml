@@ -1,5 +1,6 @@
 baseURL = 'https://example.org/'
-languageCode = 'en-us'
+languageCode = 'en-au'
+timeZone = 'Australia/Sydney'
 title = 'RADIGAN'
 
 [params]
