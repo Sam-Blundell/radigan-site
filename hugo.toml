@@ -1,0 +1,36 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'RADIGAN'
+
+[params]
+  tagline = "INDUSTRIAL AUTOMATION // PERSONAL TERMINAL"
+
+[[menu.main]]
+  name = "ABOUT"
+  url = "/about/"
+  weight = 10
+
+[[menu.main]]
+  name = "NOW"
+  url = "/now/"
+  weight = 20
+
+[[menu.main]]
+  name = "CV"
+  url = "/cv/"
+  weight = 30
+
+[[menu.main]]
+  name = "PROJECTS"
+  url = "/projects/"
+  weight = 40
+
+[[menu.main]]
+  name = "BLOG"
+  url = "/blog/"
+  weight = 50
+
+[[menu.main]]
+  name = "LINKS"
+  url = "/links/"
+  weight = 60

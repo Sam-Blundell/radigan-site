@@ -1,0 +1,21 @@
+{{ define "main" }}
+<header class="page-header">
+  <div class="page-designation">[ {{ with .Params.designation }}{{ . }}{{ else }}{{ upper .Title }}{{ end }} ]</div>
+  <h1 class="page-title">{{ .Title }}</h1>
+</header>
+
+{{ with .Content }}
+<div class="page-content">{{ . }}</div>
+{{ end }}
+
+{{ with .Pages }}
+<ul class="entry-list">
+  {{ range .ByDate.Reverse }}
+  <li>
+    <span class="entry-date">{{ .Date.Format "2006-01-02" }}</span>
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+  </li>
+  {{ end }}
+</ul>
+{{ end }}
+{{ end }}

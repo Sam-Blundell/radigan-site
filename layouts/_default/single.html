@@ -1,0 +1,13 @@
+{{ define "main" }}
+<article>
+  <header class="page-header">
+    <div class="page-designation">[ {{ with .Params.designation }}{{ . }}{{ else }}{{ upper .Title }}{{ end }} ]</div>
+    <h1 class="page-title">{{ .Title }}</h1>
+    {{ with .Params.updated }}<div class="page-meta">LAST UPDATED: {{ . }}</div>{{ end }}
+    {{ if and (not .Params.updated) (not .Date.IsZero) (ne .Section "") }}<div class="page-meta">FILED: {{ .Date.Format "2006-01-02" }}</div>{{ end }}
+  </header>
+  <div class="page-content">
+    {{ .Content }}
+  </div>
+</article>
+{{ end }}

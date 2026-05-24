@@ -1,0 +1,14 @@
+<header class="site-header">
+  <div class="site-banner">
+    <div class="site-title"><a href="{{ "/" | relURL }}">{{ .Site.Title }}</a></div>
+    <div class="status-line">REV {{ now.Format "2006.01" }} // SYS: NOMINAL</div>
+  </div>
+  <nav class="site-nav">
+    <ul>
+      {{ $current := . }}
+      {{ range .Site.Menus.main }}
+      <li><a href="{{ .URL | relURL }}"{{ if $current.IsMenuCurrent "main" . }} class="active"{{ else if $current.HasMenuCurrent "main" . }} class="active"{{ end }}>{{ .Name }}</a></li>
+      {{ end }}
+    </ul>
+  </nav>
+</header>
