@@ -26,7 +26,20 @@ body {
   font-weight: 400;
 }
 
-main { flex: 1; }
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.feed {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.feed h2 { margin-top: 0; }
+.feed .entry-list { margin-top: 0; }
 
 a {
   color: var(--accent);
@@ -221,8 +234,8 @@ blockquote {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  margin-top: 1.5rem;
-  padding: 1rem 0 2rem;
+  margin-top: auto;
+  padding: 1rem 0;
   border-top: 1px solid var(--rule);
   font-size: 0.82rem;
   text-transform: uppercase;
@@ -230,6 +243,7 @@ blockquote {
 }
 
 .pagination-info { color: var(--dim); }
+.pagination-disabled { color: var(--rule); }
 .pagination a { border-bottom: none; }
 .pagination a:hover { background: none; color: var(--accent); }
 
