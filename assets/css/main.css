@@ -93,6 +93,26 @@ h3 { font-size: 0.95rem; margin: 1.5rem 0 0.5rem; }
 
 p, ul, ol { margin: 0 0 1rem; }
 
+.page-content ul, .landing-body ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.page-content ul > li + li, .landing-body ul > li + li {
+  margin-top: 0.4rem;
+}
+
+.page-content ul > li::before, .landing-body ul > li::before {
+  content: "";
+  display: inline-block;
+  width: 0.45em;
+  height: 0.45em;
+  background: var(--accent);
+  margin-right: 0.75em;
+  position: relative;
+  top: -0.1em;
+}
+
 hr {
   border: none;
   border-top: 1px solid var(--rule);
