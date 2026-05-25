@@ -64,6 +64,7 @@ main {
   flex-direction: column;
 }
 
+/* flex containers don't collapse margins — zero these to prevent double-spacing */
 .feed h2 { margin-top: 0; }
 .feed .entry-list { margin-top: 0; }
 
