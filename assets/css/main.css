@@ -7,6 +7,32 @@
   --accent: #ffb000;
 }
 
+@media (prefers-contrast: more) {
+  :root {
+    --fg: #ffffff;
+    --dim: #aaaaaa;
+    --rule: #555;
+    --panel: #1a1a1a;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  padding: 0.5rem 1rem;
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 0.85rem;
+  border-bottom: none;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  left: 1.5rem;
+  outline: none;
+}
+
 * { box-sizing: border-box; }
 
 html { background: var(--bg); }

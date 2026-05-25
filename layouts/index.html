@@ -20,7 +20,7 @@
   </ul>
   {{ with $paginator }}
     {{ if gt .TotalPages 1 }}
-    <nav class="pagination">
+    <nav class="pagination" aria-label="Pagination">
       {{ if .HasPrev }}<a href="{{ .Prev.URL }}">← PREV</a>{{ else }}<span class="pagination-disabled">← PREV</span>{{ end }}
       <span class="pagination-info">{{ .PageNumber }} / {{ .TotalPages }}</span>
       {{ if .HasNext }}<a href="{{ .Next.URL }}">NEXT →</a>{{ else }}<span class="pagination-disabled">NEXT →</span>{{ end }}
