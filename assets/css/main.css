@@ -90,16 +90,40 @@ h1, h2, h3, h4 {
 h1 { font-size: 1.25rem; margin: 1.5rem 0 0.5rem; }
 h2 { font-size: 1.05rem; margin: 1.75rem 0 0.5rem; }
 h3 { font-size: 0.95rem; margin: 1.5rem 0 0.5rem; }
+h4 { font-size: 0.85rem; margin: 1.25rem 0 0.5rem; }
 
 p, ul, ol { margin: 0 0 1rem; }
 
-.page-content ul, .landing-body ul {
+.page-content ul, .landing-body ul,
+.page-content ol, .landing-body ol {
   list-style: none;
   padding-left: 0;
 }
 
-.page-content ul > li + li, .landing-body ul > li + li {
+.page-content ul ul, .landing-body ul ul {
+  padding-left: 1.5rem;
   margin-top: 0.4rem;
+}
+
+.page-content ul > li + li, .landing-body ul > li + li,
+.page-content ol > li + li, .landing-body ol > li + li {
+  margin-top: 0.4rem;
+}
+
+.page-content ol, .landing-body ol {
+  counter-reset: ol-counter;
+}
+
+.page-content ol > li, .landing-body ol > li {
+  counter-increment: ol-counter;
+}
+
+.page-content ol > li::before, .landing-body ol > li::before {
+  content: "[" counter(ol-counter, decimal-leading-zero) "]";
+  color: var(--accent);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  margin-right: 0.75em;
 }
 
 .page-content ul > li::before, .landing-body ul > li::before {
@@ -121,19 +145,90 @@ hr {
 
 code, pre {
   font-family: inherit;
-  background: var(--panel);
-  border: 1px solid var(--rule);
-  font-size: 0.9em;
+  background: transparent;
+  font-size: 0.95em;
 }
 
-code { padding: 0.1em 0.35em; }
+code {
+  padding: 0.1em 0.35em;
+  border: none;
+  background: #1e1e1e;
+}
 
 pre {
+  border: 3px double #5a4000;
   padding: 0.75rem 1rem;
   overflow-x: auto;
 }
 
 pre code { background: none; padding: 0; border: none; }
+.highlight, .highlight pre { background: transparent !important; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  display: block;
+  overflow-x: auto;
+}
+
+strong { font-weight: 600; }
+
+th {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent);
+  background:
+    repeating-linear-gradient(45deg, transparent, transparent 3px, #2a1f00 3px, #2a1f00 4px),
+    repeating-linear-gradient(-45deg, transparent, transparent 3px, #2a1f00 3px, #2a1f00 4px),
+    #1a1200;
+  padding: 0.5rem 0.75rem;
+  text-align: center;
+  border: 1px solid #3d2d00;
+}
+
+td {
+  padding: 0.45rem 0.75rem;
+  border: 1px solid #3d2d00;
+  text-align: center;
+}
+
+th:first-child, td:first-child { border-left: none; }
+th:last-child, td:last-child { border-right: none; }
+th { border-top: none; }
+tr:last-child td { border-bottom: none; }
+
+dl { margin: 0 0 1rem; }
+
+dt {
+  color: var(--accent);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 0.75rem;
+}
+
+dt:first-child { margin-top: 0; }
+
+dd {
+  margin-left: 0;
+  margin-top: 0.2rem;
+}
+
+.footnote-ref { margin-left: 0.15em; border-bottom: none; }
+
+.footnote-backref {
+  border-bottom: none;
+  font-size: 0;
+}
+
+.footnote-backref::after {
+  content: "↑";
+  font-size: 0.78rem;
+}
 
 img {
   max-width: 100%;

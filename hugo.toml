@@ -4,6 +4,11 @@ timeZone = 'Australia/Sydney'
 title = 'RADIGAN'
 disableKinds = ['taxonomy', 'term']
 
+[markup.highlight]
+  noClasses = true
+  style = "native"
+  guessSyntax = true
+
 [params]
   tagline = "INDUSTRIAL AUTOMATION // PERSONAL TERMINAL"
   perPage = 5
