@@ -1,0 +1,16 @@
+<div class="webring">
+  <p>Member of the <a href="https://www.matchamonday.net/">Matcha Monday</a> webring.</p>
+  <p>
+    <a id="wr-prev" href="https://www.matchamonday.net/">← prev</a>
+    //
+    <a id="wr-next" href="https://www.matchamonday.net/">next →</a>
+  </p>
+</div>
+<script type="module">
+  import { getRingNeighbors } from 'https://cdn.jsdelivr.net/gh/matchamonday/matchamonday.net/webring.mjs';
+  const { previous, next } = getRingNeighbors('{{ .Site.BaseURL | strings.TrimSuffix "/" }}');
+  document.getElementById('wr-prev').href = previous.url;
+  document.getElementById('wr-prev').textContent = '← ' + previous.name;
+  document.getElementById('wr-next').href = next.url;
+  document.getElementById('wr-next').textContent = next.name + ' →';
+</script>

@@ -247,6 +247,15 @@ blockquote {
 .pagination a { border-bottom: none; }
 .pagination a:hover { background: none; color: var(--accent); }
 
+/* ── Webring ───────────────────────────────────── */
+.webring {
+  border-top: 1px solid var(--rule);
+  margin-top: 2rem;
+  padding-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--dim);
+}
+
 /* ── Footer ────────────────────────────────────── */
 .site-footer {
   border-top: 1px solid var(--rule);

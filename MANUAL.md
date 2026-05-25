@@ -252,3 +252,46 @@ Currently, if you share a link to this site on Discord, Slack, etc., it'll show 
    ```
 
 Not essential — the site works fine without it. Worth adding if you find yourself sharing links and wanting them to look polished in previews.
+
+## Appendix C: RSS feed (optional)
+
+Hugo automatically generates RSS feeds at:
+
+- `/index.xml` — all content
+- `/blog/index.xml` — blog posts only
+- `/projects/index.xml` — projects only
+
+These already work — anyone who knows the URL can subscribe in an RSS reader. But the site doesn't currently advertise them. To make the feed discoverable:
+
+1. Add a `<link>` tag to `layouts/_default/baseof.html` inside `<head>`:
+   ```html
+   <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="/index.xml">
+   ```
+   This lets RSS readers auto-detect the feed when someone pastes the site URL.
+
+2. Optionally, add a visible link somewhere (footer, links page, contact page):
+   ```html
+   <a href="/index.xml">RSS</a>
+   ```
+
+## Appendix D: Matcha Monday webring
+
+The site includes a ready-made shortcode for the [Matcha Monday](https://www.matchamonday.net/) webring. To activate it:
+
+1. **Join the ring.** Fork [matchamonday/matchamonday.net](https://github.com/matchamonday/matchamonday.net) on GitHub. Add yourself to the `RING` array in `webring.mjs`:
+   ```js
+   {
+     url: "https://your-domain.com",
+     name: "Your Name",
+     feed: "https://your-domain.com/index.xml",
+   },
+   ```
+   Open a pull request. Once merged, purge the jsDelivr CDN cache using the URLs listed on the Matcha Monday site.
+
+2. **Add the shortcode to a page.** Drop this anywhere in a content file (about page works well):
+   ```markdown
+   {{< webring >}}
+   ```
+   It renders a small block with a link to the webring and prev/next navigation to neighboring sites. The links are populated via a small async script from jsDelivr — the only JS on the site. If JS is unavailable, the links fall back to the Matcha Monday homepage.
+
+3. **Update baseURL if needed.** The shortcode uses `baseURL` from `hugo.toml` to identify your position in the ring. Make sure it matches the `url` you added to the `RING` array (without trailing slash).
