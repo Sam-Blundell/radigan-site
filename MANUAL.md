@@ -106,6 +106,20 @@ updated: "2026-06-15"
 ---
 ```
 
+### Set a per-page description
+
+Add `description:` to any page's frontmatter:
+
+```markdown
+---
+title: "My post"
+date: 2026-06-01
+description: "What this post is about — shows up in search results and link previews"
+---
+```
+
+Keep it short — ~150 characters works well; most platforms truncate beyond that. If you don't set one, the page falls back to the site-wide description in `hugo.toml`. See Appendix B for the full social-preview story.
+
 ### Embed an image
 
 Put the source image in `assets/images/` (create the folder if needed). Use the `img` shortcode in markdown.
@@ -182,6 +196,7 @@ The `---` block at the top of each markdown file. Hugo recognises some field nam
 | `date`        | blog/projects only | Hugo   | Sort order on index pages; rendered as `FILED` on entries    |
 | `designation` | no                 | custom | The `[ ... ]` label above the title. Defaults to `[ TITLE ]` |
 | `updated`     | no                 | custom | Rendered as `LAST UPDATED` (used on the Now page)            |
+| `description` | no                 | Hugo   | Per-page meta description (search results, link previews). Falls back to the site-wide default in `hugo.toml` |
 
 Hugo supports other built-in fields (`draft`, `tags`, `aliases`, `lastmod`, etc.) — this site doesn't use them, but they'll work if you add them. Full list: <https://gohugo.io/content-management/front-matter/>.
 
@@ -198,7 +213,10 @@ You don't need to touch these for content changes. Touch them to change how the 
 | `layouts/partials/nav.html`    | Header and nav, included from `baseof.html`                                                                          |
 | `layouts/partials/footer.html` | Footer, included from `baseof.html`                                                                                  |
 | `layouts/shortcodes/img.html`  | The `{{< img >}}` shortcode (see Embed an image). Edit to tweak the image pipeline (e.g. change quality, max width). |
-| `assets/css/main.css`          | All styling. CSS variables at the top define colours, rules, fonts.                                                  |
+| `layouts/_default/_markup/render-table.html` | Override for how markdown tables render. Adds `<th scope="col">` for screen-reader accessibility. |
+| `layouts/robots.txt`           | robots.txt template. Auto-fills the sitemap URL from `baseURL` — only touch if you want to add `Disallow` rules. |
+| `assets/css/main.css`          | All styling. CSS variables at the top define colours, rules, fonts. `@font-face` rules at the very top reference the self-hosted font files. |
+| `static/fonts/`                | Self-hosted IBM Plex Mono woff2 files. Replace these (and update the `@font-face` rules in `main.css`) to change fonts. |
 
 Hugo's templating syntax is `{{ ... }}`. The full reference is at <https://gohugo.io/templates/introduction/>.
 
@@ -232,47 +250,51 @@ This is entirely optional because Cloudflare's build catches most issues and the
 
 One reason to consider this is that on the free tier of cloudflare you're limited to 500 builds permonth, so if you were rapidly trying out different changes then a local preview would stop you blowing through your build budget.
 
-## Appendix B: Social preview tags (optional)
+## Appendix B: Social preview tags
 
-Currently, if you share a link to this site on Discord, Slack, etc., it'll show the page title but no description or preview image. To add those, you'd need to:
+The site emits a basic set of social preview tags so links look right when pasted into Discord, Slack, iMessage, etc. The tags are emitted from `layouts/_default/baseof.html` and include:
 
-1. Add a `description` field to each page's frontmatter:
-   ```markdown
-   ---
-   title: "My post"
-   date: 2026-06-01
-   description: "A short summary for link previews"
-   ---
-   ```
-2. Add Open Graph meta tags to `layouts/_default/baseof.html` inside `<head>`:
-   ```html
-   {{ with .Description }}<meta name="description" content="{{ . }}">{{ end }}
-   <meta property="og:title" content="{{ .Title }}">
-   {{ with .Description }}<meta property="og:description" content="{{ . }}">{{ end }}
-   ```
+- `<meta name="description">` — also used by search engines for result snippets
+- `<meta property="og:title">` and `og:description` — text content for link preview cards
+- `<meta property="og:type">` — `article` for blog/project entries, `website` for everything else
+- `<meta property="og:url">` and `og:site_name`
+- `<meta name="twitter:card">` — `summary` (text-only card; no image)
 
-Not essential — the site works fine without it. Worth adding if you find yourself sharing links and wanting them to look polished in previews.
+Descriptions cascade: if a page sets `description:` in its frontmatter, that wins; otherwise the site-wide default is used.
 
-## Appendix C: RSS feed (optional)
+**Update the site-wide description when the site's focus changes.** It lives in `hugo.toml` under `[params]`:
+
+```toml
+[params]
+  description = "Personal site of Radigan — industrial automation, embedded systems, and field notes from the panel."
+```
+
+If this gets out of date, link previews and search snippets for any page without its own `description:` will also be out of date.
+
+### Adding a preview image (optional)
+
+Right now, link previews are text-only. To add an image card, drop a 1200×630 PNG in `static/` and add to `baseof.html` inside `<head>`:
+
+```html
+<meta property="og:image" content="{{ "/your-image.png" | absURL }}">
+```
+
+Then change the existing `twitter:card` line from `summary` to `summary_large_image`. Most platforms want the image at roughly 1200×630px; smaller images get cropped or skipped.
+
+## Appendix C: RSS feed
 
 Hugo automatically generates RSS feeds at:
 
-- `/index.xml` — all content
+- `/index.xml` — all content (blog and projects combined, newest first)
 - `/blog/index.xml` — blog posts only
 - `/projects/index.xml` — projects only
 
-These already work — anyone who knows the URL can subscribe in an RSS reader. But the site doesn't currently advertise them. To make the feed discoverable:
+Two discovery paths are wired up:
 
-1. Add a `<link>` tag to `layouts/_default/baseof.html` inside `<head>`:
-   ```html
-   <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="/index.xml">
-   ```
-   This lets RSS readers auto-detect the feed when someone pastes the site URL.
+1. **A visible `RSS` nav link** (configured as a `[[menu.main]]` block in `hugo.toml`) for human visitors.
+2. **A `<link rel="alternate">` tag in `<head>`** (in `layouts/_default/baseof.html`) so RSS readers and feed-detector browsers can find the feed automatically when someone just pastes the site URL.
 
-2. Optionally, add a visible link somewhere (footer, links page, contact page):
-   ```html
-   <a href="/index.xml">RSS</a>
-   ```
+Both currently point at `/index.xml` (everything). If you ever want to also advertise the section-specific feeds, add additional `<link rel="alternate">` tags in `baseof.html` or extra menu items in `hugo.toml`.
 
 ## Appendix D: Matcha Monday webring
 
@@ -295,3 +317,11 @@ The site includes a ready-made shortcode for the [Matcha Monday](https://www.mat
    It renders a small block with a link to the webring and prev/next navigation to neighboring sites. The links are populated via a small async script from jsDelivr — the only JS on the site. If JS is unavailable, the links fall back to the Matcha Monday homepage.
 
 3. **Update baseURL if needed.** The shortcode uses `baseURL` from `hugo.toml` to identify your position in the ring. Make sure it matches the `url` you added to the `RING` array (without trailing slash).
+
+### What activating the webring brings in
+
+This shortcode is the only feature on the site that depends on third-party code. When a page includes `{{</* webring */>}}`, every visitor's browser fetches `webring.mjs` from jsDelivr on load and runs it.
+
+- **You take on two upstream dependencies:** jsDelivr as a CDN, and the `matchamonday/matchamonday.net` repo as the source of the script. jsDelivr sees your traffic, and if the upstream export shape changes, the prev/next links stop being personalised (they still render, see next point).
+- **Graceful fallback.** The shortcode's markup has hardcoded `href` values pointing at the Matcha Monday homepage. If JS is disabled, jsDelivr is unreachable, or the script errors, the block still renders and the links still go somewhere sensible — they just don't point at your actual ring neighbours.
+- **No shortcode = no JS.** If you never add `{{</* webring */>}}` to a page, the site stays entirely zero-JS. There's no other third-party dependency in the build.

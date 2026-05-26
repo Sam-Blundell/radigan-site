@@ -13,7 +13,7 @@
 <ul class="entry-list">
   {{ range . }}
   <li>
-    <div class="entry-meta">{{ .Date.Format "2006-01-02" }}</div>
+    <div class="entry-meta">{{ .Date.Format "2006-01-02" }}{{ with .Params.designation }} // [ {{ . }} ]{{ end }}</div>
     <a href="{{ .RelPermalink }}">{{ .Title }}</a>
   </li>
   {{ end }}
