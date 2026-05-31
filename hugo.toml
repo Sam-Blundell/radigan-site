@@ -11,8 +11,7 @@ enableRobotsTXT = true
   guessSyntax = true
 
 [params]
-  tagline = "INDUSTRIAL AUTOMATION // PERSONAL TERMINAL"
-  description = "Personal site of Radigan — industrial automation, embedded systems, and field notes from the panel."
+  description ="Personal site of Radigan — industrial automation, embedded systems, and field notes from the panel."
   perPage = 5
 
 [[menu.main]]

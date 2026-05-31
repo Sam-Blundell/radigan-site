@@ -270,14 +270,6 @@ blockquote {
   margin-bottom: 2.5rem;
 }
 
-.site-banner {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
-  flex-wrap: wrap-reverse;
-}
-
 .site-title a {
   color: var(--fg);
   text-transform: uppercase;
@@ -289,13 +281,6 @@ blockquote {
 .site-title a:hover {
   background: none;
   color: var(--accent);
-}
-
-.status-line {
-  color: var(--dim);
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
 }
 
 /* ── Nav ───────────────────────────────────────── */
@@ -376,15 +361,7 @@ blockquote {
 .landing-title {
   font-size: 2rem;
   letter-spacing: 0.15em;
-  margin: 0.5rem 0;
-}
-
-.landing-tagline {
-  color: var(--dim);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.85rem;
-  margin-bottom: 2rem;
+  margin: 0.5rem 0 2rem;
 }
 
 /* ── Pagination ────────────────────────────────── */
